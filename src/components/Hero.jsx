@@ -54,8 +54,20 @@ const Hero = () => {
         {/* Right Column: Visual/Graphic */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          animate={{ 
+            opacity: 1, 
+            scale: 1,
+            y: [0, -15, 0] // <-- Moves up 15px and back down
+          }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.2 },
+            scale: { duration: 0.8, delay: 0.2 },
+            y: { 
+              duration: 6, // Takes 6 seconds for one full float cycle
+              repeat: Infinity, // Never stops
+              ease: "easeInOut" 
+            }
+          }}
           className="relative hidden md:block"
         >
           {/* Image Container with overflow-hidden to keep the perfect circle */}
