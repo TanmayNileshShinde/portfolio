@@ -93,7 +93,7 @@ body {
   border-radius: 4px;
 }
 
-/* Three.js Background Canvas Container */
+/* Three.js Background Canvas Container (Interactive 360 Orbit Enabled!) */
 #three-canvas-container {
   position: fixed;
   top: 0;
@@ -101,7 +101,13 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+#three-canvas-container canvas {
+  width: 100%;
+  height: 100%;
+  outline: none;
 }
 
 /* Atmospheric Overlay */
@@ -109,17 +115,39 @@ body {
   position: fixed;
   inset: 0;
   background: radial-gradient(circle at 50% 50%, var(--primary-glow) 0%, transparent 80%),
-              linear-gradient(rgba(4, 8, 23, 0.7) 0%, rgba(4, 8, 23, 0.95) 100%);
+              linear-gradient(rgba(4, 8, 23, 0.6) 0%, rgba(4, 8, 23, 0.92) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
+/* Root App allows 3D Orbit clicks to pass through background */
 #app {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  pointer-events: none;
+}
+
+/* Allow interactive UI components to catch clicks */
+.hud-header,
+.hero-left,
+.avatar-hologram-stage,
+.f1-cockpit,
+.section-header,
+.filter-bar,
+.projects-grid,
+.skill-cat-card,
+.terminal-window,
+.terminal-quick-chips,
+.about-card,
+.about-image-card,
+.contact-card,
+.footer-section,
+.project-modal-backdrop,
+.sandbox-toolbar {
+  pointer-events: auto;
 }
 
 /* Glassmorphism */
@@ -325,7 +353,7 @@ body {
 }
 
 /* =========================================================================
-   HERO SECTION
+   HERO SECTION & 3D SANDBOX TOOLS
    ========================================================================= */
 .hero-section {
   min-height: 90vh;
@@ -348,7 +376,7 @@ body {
 .hero-left {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .status-pill {
@@ -426,7 +454,41 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 10px;
+  margin-top: 6px;
+}
+
+/* 3D Interactive Sandbox Controller Pill */
+.sandbox-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border-glow);
+  background: rgba(8, 14, 32, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 6px;
+}
+
+.sandbox-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sandbox-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #000;
+  box-shadow: 0 0 12px var(--primary-glow);
 }
 
 .btn-primary {
@@ -1652,6 +1714,7 @@ body {
   .hero-left { align-items: center; }
   .hero-actions { justify-content: center; }
   .hero-metrics-pill-bar { justify-content: center; }
+  .sandbox-toolbar { justify-content: center; }
   .about-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
 }

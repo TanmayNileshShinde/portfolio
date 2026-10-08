@@ -31,7 +31,7 @@ app.innerHTML = `
         <span>60 FPS</span>
       </div>
       <div class="telemetry-item">
-        <span>WEBGL 2.0</span>
+        <span>WEBGL 2.0 BLOOM</span>
       </div>
     </div>
 
@@ -56,7 +56,7 @@ app.innerHTML = `
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Ultra 3D Interactive Lab Toolbar -->
   <section class="hero-section" id="hero">
     <div class="hero-container">
       <div class="hero-left">
@@ -87,17 +87,22 @@ app.innerHTML = `
 
         <div class="hero-actions">
           <a href="#projects" class="btn-primary">
-            <span>Explore Systems</span>
+            <span>Explore 10 Systems</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
           </a>
           <a href="#terminal" class="btn-secondary">
             <span>Launch CLI Shell</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
           </a>
-          <button class="btn-secondary" id="hero-pulse-btn">
-            <span>Pulse 3D Core</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-          </button>
+        </div>
+
+        <!-- 3D Interactive Sandbox Controller Pill -->
+        <div class="sandbox-toolbar glass-panel">
+          <span class="font-mono text-xs text-muted">3D LAB TOOLS:</span>
+          <button class="sandbox-btn" id="btn-3d-action">🔥 TRIGGER 3D ACTION</button>
+          <button class="sandbox-btn" id="btn-3d-wireframe">📐 WIREFRAME</button>
+          <button class="sandbox-btn" id="btn-3d-turntable">🔄 TURNTABLE</button>
+          <span class="font-mono text-xs text-cyan" style="margin-left: auto;">💡 CLICK & DRAG 3D MODEL</span>
         </div>
       </div>
 
@@ -124,7 +129,6 @@ app.innerHTML = `
   <!-- Interactive Dynamic Thematic Cockpit Widget -->
   <section class="telemetry-simulator-section">
     <div class="f1-cockpit" id="thematic-cockpit">
-      <!-- Will be updated dynamically based on active theme -->
       <div id="cockpit-content"></div>
     </div>
   </section>
@@ -132,10 +136,10 @@ app.innerHTML = `
   <!-- Production Systems Showcase (10/10 Verified) -->
   <section class="section-wrapper" id="projects">
     <div class="section-header">
-      <div class="section-tag">// PRODUCTION DEPLOYMENTS (10/10 VERIFIED & LIVE)</div>
+      <div class="section-tag">// 3D SPATIAL HOLO-CAROUSEL & PRODUCTION DEPLOYMENTS</div>
       <h2 class="section-title">Engineered Systems & Flagships</h2>
       <p class="section-desc">
-        All 10 production projects are live on Vercel with source code public on GitHub. Click 'Live App' or 'GitHub' on any card to test immediately.
+        Drag to spin the 3D WebGL Cylinder Ring above, or explore each verified card below. All 10 projects are 100% live on Vercel and public on GitHub.
       </p>
     </div>
 
@@ -239,7 +243,6 @@ app.innerHTML = `
         <p class="card-desc">Reach out directly via verified channels or copy my email address.</p>
 
         <div class="contact-links-list">
-          <!-- Email with Copy Pill -->
           <div class="contact-item-row">
             <div class="contact-item-left">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -251,7 +254,6 @@ app.innerHTML = `
             <button class="btn-copy-email" id="btn-copy-email">Copy Email</button>
           </div>
 
-          <!-- LinkedIn -->
           <a href="${personalInfo.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-item-row">
             <div class="contact-item-left">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
@@ -263,7 +265,6 @@ app.innerHTML = `
             <span>↗</span>
           </a>
 
-          <!-- GitHub -->
           <a href="${personalInfo.github}" target="_blank" rel="noopener noreferrer" class="contact-item-row">
             <div class="contact-item-left">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -275,7 +276,6 @@ app.innerHTML = `
             <span>↗</span>
           </a>
 
-          <!-- Location -->
           <div class="contact-item-row">
             <div class="contact-item-left">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -331,22 +331,24 @@ app.innerHTML = `
       </div>
 
       <div class="footer-copy">
-        © ${new Date().getFullYear()} Tanmay Nilesh Shinde. 3D WebGL Multi-Theme Engine. F1 Red Bull • Cricket • Gaming. All systems operational.
+        © ${new Date().getFullYear()} Tanmay Nilesh Shinde. Ultra Pro Max 3D WebGL Engine. F1 Red Bull • Cricket • Gaming. All systems operational.
       </div>
     </div>
   </footer>
 `;
 
-// 3. Initialize Three.js 3D WebGL Scene
+// 3. Initialize Project Modal Controller first
+const projectModal = new ProjectModalController();
+
+// 4. Initialize Three.js 3D WebGL Scene with Project Modal integration
 const canvasContainer = document.querySelector('#three-canvas-container');
-const sceneManager = new SceneManager(canvasContainer);
+const sceneManager = new SceneManager(canvasContainer, (project) => {
+  projectModal.open(project.id);
+});
 sceneManager.setTheme(savedTheme, false);
 
-// 4. Initialize Cyber Cursor
+// 5. Initialize Cyber Cursor
 new CyberCursor();
-
-// 5. Initialize Project Modal Controller
-const projectModal = new ProjectModalController();
 
 // 6. Theme Switching Logic
 function applyTheme(themeId) {
@@ -427,11 +429,11 @@ function renderThematicCockpit(themeId) {
       <div class="f1-controls-bar">
         <button class="btn-f1-test" id="f1-accel-btn">🔥 MAX ACCELERATION BURST</button>
         <button class="btn-f1-test" id="f1-pit-btn">⏱️ SIMULATE PIT STRATEGY</button>
-        <span class="font-mono text-xs text-muted">Red Bull Racing Champion Tech Stack: React 19 + Socket.io</span>
+        <button class="btn-f1-test" id="f1-drs-btn">⚡ TOGGLE DRS FLAP</button>
+        <span class="font-mono text-xs text-muted">Red Bull Racing Tech Stack: React 19 + Three.js + Socket.io</span>
       </div>
     `;
 
-    // Attach F1 Button Listeners
     const f1SpeedEl = document.querySelector('#f1-speed');
     const f1RpmEl = document.querySelector('#f1-rpm');
     const f1GearEl = document.querySelector('#f1-gear');
@@ -442,6 +444,7 @@ function renderThematicCockpit(themeId) {
 
     document.querySelector('#f1-accel-btn')?.addEventListener('click', () => {
       sound.playRedBullF1();
+      sceneManager.f1Car.triggerRev();
       let step = 0;
       const interval = setInterval(() => {
         step++;
@@ -472,6 +475,14 @@ function renderThematicCockpit(themeId) {
         if (f1GearEl) f1GearEl.innerHTML = `8th <small style="font-size: 0.9rem; color: #ffc800;">[DRS ACTIVE]</small>`;
         if (f1SpeedEl) f1SpeedEl.innerHTML = `342.6 <small style="font-size: 1rem; color: #8d9bb0;">km/h</small>`;
       }, 2100);
+    });
+
+    document.querySelector('#f1-drs-btn')?.addEventListener('click', () => {
+      sound.playClick();
+      const isOpen = sceneManager.f1Car.toggleDRS();
+      if (f1GearEl) {
+        f1GearEl.innerHTML = isOpen ? `8th <small style="font-size: 0.9rem; color: #00f57a;">[DRS OPEN]</small>` : `8th <small style="font-size: 0.9rem; color: #8d9bb0;">[DRS CLOSED]</small>`;
+      }
     });
 
   } else if (themeId === 'cricket') {
@@ -511,28 +522,21 @@ function renderThematicCockpit(themeId) {
       </div>
 
       <div class="f1-controls-bar">
+        <button class="btn-f1-test" id="cricket-bowl-btn">⚡ BOWL 150 KM/H OUTSWINGER (STUMP SMASH)</button>
         <button class="btn-f1-test" id="cricket-six-btn">💥 HIT MONSTER MAXIMUM (6)</button>
-        <button class="btn-f1-test" id="cricket-bowl-btn">⚡ 155 KM/H EXPRESS BALL</button>
         <span class="font-mono text-xs text-muted">Stadium Analytics Engine: Live Algorithmic Telemetry</span>
       </div>
     `;
 
-    document.querySelector('#cricket-six-btn')?.addEventListener('click', () => {
-      sound.playCricket();
-      confetti({ particleCount: 70, spread: 80, origin: { y: 0.6 }, colors: ['#00f57a', '#ffd700', '#ffffff'] });
-      const scoreEl = document.querySelector('#cricket-score');
-      if (scoreEl) scoreEl.innerHTML = `204/3 <small style="font-size: 1rem; color: #8d9bb0;">(18.3 ov)</small>`;
+    document.querySelector('#cricket-bowl-btn')?.addEventListener('click', () => {
+      sceneManager.cricket.bowlDelivery();
     });
 
-    document.querySelector('#cricket-bowl-btn')?.addEventListener('click', () => {
-      sound.playCricket();
-      const speedEl = document.querySelector('#cricket-speed');
-      if (speedEl) {
-        speedEl.innerHTML = `155.8 <small style="font-size: 1rem; color: #8d9bb0;">km/h</small>`;
-        setTimeout(() => {
-          speedEl.innerHTML = `152.4 <small style="font-size: 1rem; color: #8d9bb0;">km/h</small>`;
-        }, 2000);
-      }
+    document.querySelector('#cricket-six-btn')?.addEventListener('click', () => {
+      sceneManager.cricket.hitSix();
+      confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 }, colors: ['#00f57a', '#ffd700', '#ffffff'] });
+      const scoreEl = document.querySelector('#cricket-score');
+      if (scoreEl) scoreEl.innerHTML = `204/3 <small style="font-size: 1rem; color: #8d9bb0;">(18.3 ov)</small>`;
     });
 
   } else if (themeId === 'gaming') {
@@ -580,6 +584,7 @@ function renderThematicCockpit(themeId) {
 
     document.querySelector('#game-boost-btn')?.addEventListener('click', () => {
       sound.playGaming();
+      sceneManager.arcade.pressButton();
       confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 }, colors: ['#f72585', '#4cc9f0', '#7209b7'] });
       const comboEl = document.querySelector('#game-combo');
       if (comboEl) {
@@ -594,7 +599,24 @@ function renderThematicCockpit(themeId) {
 
 renderThematicCockpit(savedTheme);
 
-// 8. Bind Theme Button Clicks in HUD
+// 8. 3D Sandbox Toolbar Buttons
+document.querySelector('#btn-3d-action')?.addEventListener('click', () => {
+  sceneManager.triggerCorePulse();
+});
+
+document.querySelector('#btn-3d-wireframe')?.addEventListener('click', (e) => {
+  sound.playClick();
+  const isWire = sceneManager.toggleWireframe();
+  e.target.textContent = isWire ? '✨ SHADED' : '📐 WIREFRAME';
+});
+
+document.querySelector('#btn-3d-turntable')?.addEventListener('click', (e) => {
+  sound.playClick();
+  const isRotating = sceneManager.toggleAutoRotate();
+  e.target.textContent = isRotating ? '⏸️ PAUSE ORBIT' : '🔄 AUTO-ORBIT';
+});
+
+// 9. Bind Theme Button Clicks in HUD
 document.querySelectorAll('.mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const targetTheme = btn.dataset.theme;
@@ -602,11 +624,11 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
   });
 });
 
-// 9. Initialize Interactive Terminal
+// 10. Initialize Interactive Terminal
 const terminalMount = document.querySelector('#terminal-mount');
 new TerminalController(terminalMount, sceneManager, (theme) => applyTheme(theme));
 
-// 10. Live Clock (Mumbai / IST UTC+5:30)
+// 11. Live Clock (Mumbai / IST UTC+5:30)
 function updateClock() {
   const clockEl = document.querySelector('#live-ist-clock');
   if (clockEl) {
@@ -618,7 +640,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// 11. Sound Toggle Controller
+// 12. Sound Toggle Controller
 const soundBtn = document.querySelector('#sound-toggle');
 const soundLabel = document.querySelector('#sound-label');
 soundBtn.addEventListener('click', () => {
@@ -630,11 +652,6 @@ soundBtn.addEventListener('click', () => {
     soundBtn.classList.remove('sound-on');
     soundLabel.textContent = 'SFX: OFF';
   }
-});
-
-// 12. Hero Pulse Core Button
-document.querySelector('#hero-pulse-btn').addEventListener('click', () => {
-  sceneManager.triggerCorePulse();
 });
 
 // 13. Render All 10 Projects with 3D Tilt Cards & Direct Verified Links
