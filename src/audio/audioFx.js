@@ -1,5 +1,5 @@
 // Procedural Web Audio API Sound Synthesizer
-// Zero external assets required, instant low-latency cyber acoustics
+// Zero external assets required, instant low-latency acoustics
 
 class SoundController {
   constructor() {
@@ -139,6 +139,85 @@ class SoundController {
 
       osc.start();
       osc.stop(this.ctx.currentTime + 0.35);
+    } catch (e) {}
+  }
+
+  // 1. F1 Red Bull Racing Sound Effect (V6 Turbo Rev & DRS)
+  playRedBullF1() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sawtooth';
+      // Throttle blip rev up to high pitch
+      osc.frequency.setValueAtTime(280, now);
+      osc.frequency.exponentialRampToValueAtTime(1450, now + 0.3);
+
+      gain.gain.setValueAtTime(0.07, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.45);
+    } catch (e) {}
+  }
+
+  // 2. Cricket Willow-Leather Ping & Stadium Resonance
+  playCricket() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      // High strike ping
+      const strike = this.ctx.createOscillator();
+      const strikeGain = this.ctx.createGain();
+
+      strike.type = 'triangle';
+      strike.frequency.setValueAtTime(1600, now);
+      strike.frequency.exponentialRampToValueAtTime(400, now + 0.12);
+
+      strikeGain.gain.setValueAtTime(0.08, now);
+      strikeGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+
+      strike.connect(strikeGain);
+      strikeGain.connect(this.ctx.destination);
+
+      strike.start(now);
+      strike.stop(now + 0.15);
+    } catch (e) {}
+  }
+
+  // 3. Cyber Gaming 8-Bit Power-Up Arpeggio
+  playGaming() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const notes = [440, 554, 659, 880]; // A Major 8-bit fan
+      notes.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const startTime = this.ctx.currentTime + idx * 0.06;
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.04, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.08);
+      });
     } catch (e) {}
   }
 }

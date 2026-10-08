@@ -1,11 +1,12 @@
-import { personalInfo, projects, skillCategories } from '../data/portfolioData.js';
+import { personalInfo, projects, skillCategories, themesConfig } from '../data/portfolioData.js';
 import { sound } from '../audio/audioFx.js';
 import confetti from 'canvas-confetti';
 
 export class TerminalController {
-  constructor(terminalEl, sceneManager) {
+  constructor(terminalEl, sceneManager, onThemeChange) {
     this.el = terminalEl;
     this.sceneManager = sceneManager;
+    this.onThemeChange = onThemeChange;
     this.history = [];
     this.historyIndex = -1;
     this.init();
@@ -28,13 +29,13 @@ export class TerminalController {
         <div class="terminal-body" id="term-output">
           <div class="term-line welcome">
             <span class="term-accent">TANMAY-OS [Version 2.6.0.2026]</span><br/>
-            (c) 2026 Tanmay Nilesh Shinde. All rights reserved.<br/>
-            Type <span class="term-cyan">help</span> to list commands or try <span class="term-green">sudo hire</span>.
+            (c) 2026 Tanmay Nilesh Shinde. All systems operational.<br/>
+            Type <span class="term-cyan">help</span> to list commands or switch theme with <span class="term-yellow">theme &lt;redbull|cricket|gaming&gt;</span>.
           </div>
         </div>
         <div class="terminal-input-row">
-          <span class="term-prompt">tanmay@quantum-core:~$</span>
-          <input type="text" id="term-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="Type a command (try 'help')..."/>
+          <span class="term-prompt">tanmay@core:~$</span>
+          <input type="text" id="term-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="Type a command (try 'help' or 'sudo hire')..."/>
         </div>
       </div>
     `;
@@ -84,7 +85,7 @@ export class TerminalController {
   }
 
   executeCommand(rawCmd) {
-    this.printLine(`<span class="term-prompt">tanmay@quantum-core:~$</span> ${escapeHtml(rawCmd)}`);
+    this.printLine(`<span class="term-prompt">tanmay@core:~$</span> ${escapeHtml(rawCmd)}`);
     const parts = rawCmd.toLowerCase().trim().split(/\s+/);
     const cmd = parts[0];
     const arg = parts[1];
@@ -93,21 +94,20 @@ export class TerminalController {
       case 'help':
         this.printLine(`
           <div class="term-grid">
-            <div><span class="term-cyan">about</span>       : Engineer bio, ethos & specializations</div>
-            <div><span class="term-cyan">projects</span>    : Flagship deployed production systems</div>
-            <div><span class="term-cyan">skills</span>      : Verified tech stack breakdown</div>
-            <div><span class="term-cyan">f1</span>          : Live F1 telemetry streaming burst</div>
-            <div><span class="term-cyan">stats</span>       : Production metrics & architecture stats</div>
-            <div><span class="term-cyan">theme &lt;mode&gt;</span> : 3D world: 'quantum', 'grid', 'neural'</div>
-            <div><span class="term-cyan">contact</span>     : Direct communication coordinates</div>
-            <div><span class="term-cyan">sudo hire</span>   : Initiate high-priority contract protocol 🎉</div>
-            <div><span class="term-cyan">clear</span>       : Purge the terminal display buffer</div>
+            <div><span class="term-cyan">about</span>       : Engineer bio, ethos & passions</div>
+            <div><span class="term-cyan">projects</span>    : Verified live Vercel apps & GitHub repos</div>
+            <div><span class="term-cyan">skills</span>      : Tech stack breakdown</div>
+            <div><span class="term-cyan">theme &lt;name&gt;</span> : 'redbull', 'cricket', or 'gaming'</div>
+            <div><span class="term-cyan">f1</span>          : Max Verstappen & Red Bull Racing telemetry</div>
+            <div><span class="term-cyan">cricket</span>     : Match scoreboard & stadium stats</div>
+            <div><span class="term-cyan">gaming</span>      : React Nexus 8-in-1 arcade stats</div>
+            <div><span class="term-cyan">sudo hire</span>   : Priority hiring dispatch protocol 🎉</div>
+            <div><span class="term-cyan">clear</span>       : Purge the terminal buffer</div>
           </div>
         `);
         break;
 
       case 'about':
-      case 'bio':
       case 'whoami':
         this.printLine(`
           <div class="term-box">
@@ -119,9 +119,11 @@ export class TerminalController {
         break;
 
       case 'projects':
-        let projHtml = `<div class="term-box"><span class="term-accent font-bold">DEPLOYED PRODUCTION SYSTEMS:</span><br/>`;
+        let projHtml = `<div class="term-box"><span class="term-accent font-bold">VERIFIED PRODUCTION SYSTEMS (10/10 LIVE):</span><br/><br/>`;
         projects.forEach(p => {
-          projHtml += `• <a href="${p.liveUrl}" target="_blank" class="term-cyan underline">${p.title}</a> [${p.category}] - ${p.tagline}<br/>`;
+          projHtml += `• <a href="${p.liveUrl}" target="_blank" class="term-cyan underline font-bold">${p.title}</a> [${p.category}]<br/>`;
+          projHtml += `  ↳ Live Vercel: <a href="${p.liveUrl}" target="_blank" class="term-green underline">${p.liveUrl}</a><br/>`;
+          projHtml += `  ↳ GitHub: <a href="${p.githubUrl}" target="_blank" class="term-accent underline">${p.githubUrl}</a><br/><br/>`;
         });
         projHtml += `</div>`;
         this.printLine(projHtml);
@@ -138,81 +140,83 @@ export class TerminalController {
         this.printLine(skillHtml);
         break;
 
-      case 'f1':
-      case 'telemetry':
-        this.printLine(`
-          <div class="term-f1-box">
-            <span class="term-red font-bold">🏎️ F1 RACE ENGINEER TELEMETRY BURST // MONZA GP:</span><br/>
-            [SPEED]: <span class="term-green">342.6 km/h</span> | [RPM]: 11,840 | [GEAR]: 8th<br/>
-            [DRS]: <span class="term-cyan">ACTIVE (ZONE 2)</span> | [THROTTLE]: 100% | [BRAKE]: 0%<br/>
-            [TIRE DEGRADATION]: Soft C5 (Lap 14/53) -> <span class="term-yellow">Wear: 24.3% | Grip: 94%</span><br/>
-            [DELTA TO LEADER]: <span class="term-green">-0.184s (PURPLE SECTOR 2)</span><br/>
-            [PIT STRATEGY]: Box Lap 21 for Hard Compound (Delta margin: +3.8s)
-          </div>
-        `);
-        sound.playPulse();
-        break;
-
-      case 'stats':
-        this.printLine(`
-          <div class="term-box">
-            <span class="term-accent font-bold">SYSTEM INTEGRITY & PRODUCTION TELEMETRY:</span><br/>
-            • Active Projects: <span class="term-green">12 Systems</span><br/>
-            • Global Uptime: <span class="term-green">99.99%</span><br/>
-            • P2P WebRTC Latency: <span class="term-cyan">&lt; 35ms</span><br/>
-            • Telemetry Frequency: <span class="term-cyan">60Hz Real-Time</span><br/>
-            • 3D WebGL Engine: <span class="term-green">Active (60 FPS Locked)</span>
-          </div>
-        `);
-        break;
-
       case 'theme':
-        if (arg === 'quantum' || arg === 'grid' || arg === 'neural') {
-          if (this.sceneManager) {
-            this.sceneManager.setMode(arg);
-            this.printLine(`<span class="term-green">3D Environment switched to '${arg.toUpperCase()} MODE'.</span>`);
-            // Update UI buttons if present
-            document.querySelectorAll('.mode-btn').forEach(b => {
-              b.classList.toggle('active', b.dataset.mode === arg);
-            });
+        const targetTheme = (arg === 'f1') ? 'redbull' : arg;
+        if (targetTheme === 'redbull' || targetTheme === 'cricket' || targetTheme === 'gaming') {
+          if (this.onThemeChange) {
+            this.onThemeChange(targetTheme);
+            this.printLine(`<span class="term-green">✓ Switched active theme to <strong>${themesConfig[targetTheme].name}</strong>!</span>`);
           }
         } else {
-          this.printLine(`<span class="term-red">Usage: theme [quantum | grid | neural]</span>`);
+          this.printLine(`<span class="term-red">Usage: theme [redbull | cricket | gaming]</span>`);
         }
+        break;
+
+      case 'f1':
+      case 'redbull':
+      case 'max':
+        sound.playRedBullF1();
+        this.printLine(`
+          <div class="term-f1-box">
+            <span class="term-yellow font-bold text-base">🏎️ ORACLE RED BULL RACING // MAX VERSTAPPEN #1:</span><br/>
+            [DRIVER]: <span class="term-green">Max Verstappen (Car #1)</span> | [TEAM]: Oracle Red Bull Racing<br/>
+            [SPEED]: <span class="term-cyan">351.4 km/h</span> | [RPM]: 12,200 | [GEAR]: 8th [DRS ON]<br/>
+            [HONDA RBPT]: V6 Turbo Hybrid delivering 1,000+ BHP<br/>
+            [PIT WALL STRATEGY]: Box Lap 21 for Hard Compound (Delta: -0.192s PURPLE SECTOR)<br/>
+            [SIMULATOR]: "Simply lovely!" 🦁
+          </div>
+        `);
+        break;
+
+      case 'cricket':
+        sound.playCricket();
+        this.printLine(`
+          <div class="term-box">
+            <span class="term-green font-bold text-base">🏏 FLOODLIT CRICKET STADIUM // MATCH RADAR:</span><br/>
+            [MATCH]: T20 Championship Final (Wankhede Stadium, Mumbai)<br/>
+            [CURRENT SCORE]: <span class="term-yellow font-bold">194/3 (17.4 Overs)</span><br/>
+            [RUN RATE]: <span class="term-green">10.98 RPO</span> | [PROJECTED]: 228<br/>
+            [BALL TELEMETRY]: 148.6 km/h Inswinging Yorker -> Dug out for a <span class="term-cyan font-bold">MONSTROUS SIX! 💥</span><br/>
+            [ATMOSPHERE]: 45,000 cheering fans under stadium floodlights!
+          </div>
+        `);
+        break;
+
+      case 'gaming':
+      case 'arcade':
+        sound.playGaming();
+        this.printLine(`
+          <div class="term-box">
+            <span class="term-accent font-bold text-base">🎮 REACT NEXUS // 8-IN-1 ARCADE HUB:</span><br/>
+            [ENGINE]: Scalable React + Framer Motion + Web Audio API<br/>
+            [GAMES]: Retro Space Defender, Pong 2026, Cyber Snake, Neon Runner...<br/>
+            [HIGH SCORE]: <span class="term-yellow font-bold">999,420 PTS</span> [GLOBAL RANK #1]<br/>
+            [FPS]: <span class="term-green">60 FPS Locked</span> | Latency: 0ms Input Lag<br/>
+            Play live: <a href="https://reactnexus.vercel.app" target="_blank" class="term-cyan underline">reactnexus.vercel.app</a>
+          </div>
+        `);
         break;
 
       case 'sudo':
         if (arg === 'hire') {
+          sound.playPulse();
           this.printLine(`
             <div class="term-hire-box">
-              <span class="term-green font-bold text-lg">🎉 [PROTOCOL GRANTED] TANMAY NILESH SHINDE RECRUITED!</span><br/>
+              <span class="term-yellow font-bold text-lg">🎉 [OFFER PROTOCOL GRANTED] TANMAY NILESH SHINDE RECRUITED!</span><br/>
               Status: Excellent choice! High-impact engineering capacity unlocked.<br/>
-              Connecting to priority dispatch: <a href="mailto:${personalInfo.email}" class="term-cyan underline">${personalInfo.email}</a><br/>
+              Direct Email: <a href="mailto:${personalInfo.email}" class="term-cyan underline">${personalInfo.email}</a><br/>
               Direct LinkedIn: <a href="${personalInfo.linkedin}" target="_blank" class="term-cyan underline">linkedin.com/in/tanmay-shinde</a>
             </div>
           `);
-          sound.playPulse();
           confetti({
             particleCount: 120,
             spread: 90,
             origin: { y: 0.6 },
-            colors: ['#00f5d4', '#0070f3', '#7928ca', '#ffffff']
+            colors: ['#ffc800', '#e10600', '#00f57a', '#ffffff']
           });
         } else {
-          this.printLine(`<span class="term-yellow">sudo: user 'guest' is not in the sudoers file. Did you mean 'sudo hire'?</span>`);
+          this.printLine(`<span class="term-yellow">sudo: did you mean 'sudo hire'?</span>`);
         }
-        break;
-
-      case 'contact':
-        this.printLine(`
-          <div class="term-box">
-            <span class="term-accent font-bold">COMMUNICATION RADAR:</span><br/>
-            📧 Email: <a href="mailto:${personalInfo.email}" class="term-cyan">${personalInfo.email}</a><br/>
-            💼 LinkedIn: <a href="${personalInfo.linkedin}" target="_blank" class="term-cyan">${personalInfo.linkedin}</a><br/>
-            🐙 GitHub: <a href="${personalInfo.github}" target="_blank" class="term-cyan">${personalInfo.github}</a><br/>
-            📍 Location: ${personalInfo.location}
-          </div>
-        `);
         break;
 
       case 'clear':
