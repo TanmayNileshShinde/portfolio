@@ -7,7 +7,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/tanmay-shinde-9b07753bb",
   location: "Mumbai, India",
   status: "Available for Elite Engineering Roles & High-Impact Contracts",
-  bio: `I am Tanmay Nilesh Shinde, a Computer Engineering graduate and full-stack software engineer who bridges high-throughput backend infrastructure with cinematic, high-performance web experiences. Passionate about Formula 1 telemetry (die-hard Max Verstappen & Oracle Red Bull Racing fan), competitive Cricket, and retro-modern Game Engineering, I build web systems that are lightning fast, scalable, and visually unforgettable.`,
+  bio: `I am Tanmay Nilesh Shinde, a Computer Engineering graduate and full-stack software engineer who bridges high-throughput backend infrastructure with cinematic, high-performance web experiences. Passionate about Formula 1 telemetry (die-hard Max Verstappen & Oracle Red Bull Racing fan inspired by the Special White Livery), competitive Cricket, and retro-modern Game Engineering, I build web systems that are lightning fast, scalable, and visually unforgettable.`,
   stats: [
     { label: "Verified Production Apps", value: "10+" },
     { label: "Live Vercel Deployments", value: "100%" },
@@ -252,15 +252,15 @@ export const projects = [
 export const themesConfig = {
   redbull: {
     id: "redbull",
-    name: "🏎️ RED BULL / F1",
-    subtitle: "Max Verstappen #1 // Championship Racing Bull",
-    primary: "#ffc800",     // Racing Bull Yellow
-    secondary: "#e10600",   // Red Bull Red
-    accent: "#ff5500",      // Dutch Orange
-    bgDeep: "#040714",      // Navy Deep
-    bgCard: "rgba(9, 18, 44, 0.75)",
-    glow: "rgba(255, 200, 0, 0.4)",
-    badge: "MAX VERSTAPPEN #1 // SIMULATOR ONLINE"
+    name: "🏎️ WHITE RED BULL / F1",
+    subtitle: "Special White Edition // Max Verstappen #1 Tribute Livery",
+    primary: "#ffffff",     // Pearl Matte White
+    secondary: "#e10600",   // Championship Crimson Bull
+    accent: "#ffc800",      // Pirelli Yellow Rim Stripe
+    bgDeep: "#060810",      // Dark Studio Asphalt
+    bgCard: "rgba(10, 14, 26, 0.75)",
+    glow: "rgba(225, 6, 0, 0.45)",
+    badge: "WHITE EDITION RED BULL // MAX VERSTAPPEN #1"
   },
   cricket: {
     id: "cricket",

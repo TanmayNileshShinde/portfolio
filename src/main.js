@@ -4,6 +4,7 @@ import { SceneManager } from './three/sceneManager.js';
 import { sound } from './audio/audioFx.js';
 import { TerminalController } from './components/terminal.js';
 import { ProjectModalController } from './components/projectModal.js';
+import { F1SpecModalController } from './components/f1SpecModal.js';
 import { setupCardTilt } from './components/cardTilt.js';
 import { CyberCursor } from './components/cyberCursor.js';
 import confetti from 'canvas-confetti';
@@ -31,13 +32,13 @@ app.innerHTML = `
         <span>60 FPS</span>
       </div>
       <div class="telemetry-item">
-        <span>WEBGL 2.0 BLOOM</span>
+        <span>WHITE RB20 EDITION</span>
       </div>
     </div>
 
     <!-- 3 Bespoke Themes Switcher -->
     <div class="hud-modes">
-      <button class="mode-btn ${savedTheme === 'redbull' ? 'active' : ''}" data-theme="redbull">🏎️ RED BULL / F1</button>
+      <button class="mode-btn ${savedTheme === 'redbull' ? 'active' : ''}" data-theme="redbull">🏎️ WHITE RED BULL</button>
       <button class="mode-btn ${savedTheme === 'cricket' ? 'active' : ''}" data-theme="cricket">🏏 CRICKET</button>
       <button class="mode-btn ${savedTheme === 'gaming' ? 'active' : ''}" data-theme="gaming">🎮 GAMING</button>
     </div>
@@ -80,7 +81,7 @@ app.innerHTML = `
 
         <div class="hero-metrics-pill-bar">
           <div class="hero-metric-chip">⚡ &lt;35ms WebRTC Mesh</div>
-          <div class="hero-metric-chip">🏎️ 350+ km/h F1 Telemetry</div>
+          <div class="hero-metric-chip">🏎️ 351.4 km/h Red Bull Livery</div>
           <div class="hero-metric-chip">🏏 150 km/h Fast Ball Seam</div>
           <div class="hero-metric-chip">🎮 8-in-1 Arcade Engine</div>
         </div>
@@ -98,19 +99,22 @@ app.innerHTML = `
 
         <!-- 3D Interactive Sandbox Controller Pill -->
         <div class="sandbox-toolbar glass-panel">
-          <span class="font-mono text-xs text-muted">3D LAB TOOLS:</span>
-          <button class="sandbox-btn" id="btn-3d-action">🔥 TRIGGER 3D ACTION</button>
+          <button class="sandbox-btn" id="btn-3d-photo" title="Exact Rear 3/4 Studio View from Photo">📸 PHOTO ANGLE</button>
+          <button class="sandbox-btn" id="btn-3d-cockpit" title="Driver Cockpit POV">🏎️ COCKPIT</button>
+          <button class="sandbox-btn" id="btn-3d-diffuser" title="Diffuser & FIA Rain Light">🔴 RAIN LIGHT</button>
+          <button class="sandbox-btn highlight-red" id="btn-f1-details" style="border-color: #e10600; color: #ff3344; font-weight: 700;">🔍 ALL CAR DETAILS</button>
+          <button class="sandbox-btn" id="btn-3d-action">🔥 REV & DRS</button>
           <button class="sandbox-btn" id="btn-3d-wireframe">📐 WIREFRAME</button>
           <button class="sandbox-btn" id="btn-3d-turntable">🔄 TURNTABLE</button>
-          <span class="font-mono text-xs text-cyan" style="margin-left: auto;">💡 CLICK & DRAG 3D MODEL</span>
+          <span class="font-mono text-xs text-cyan" style="margin-left: auto;">💡 DRAG TO ROTATE 3D CAR</span>
         </div>
       </div>
 
       <div class="hero-right">
         <div class="avatar-hologram-stage">
           <div class="avatar-glow-backdrop"></div>
-          <div class="orbit-tag orbit-tag-1" id="avatar-tag-1">🏎️ Verstappen #1</div>
-          <div class="orbit-tag orbit-tag-2" id="avatar-tag-2">🏏 Stadium Powerplay</div>
+          <div class="orbit-tag orbit-tag-1" id="avatar-tag-1">🏎️ White Bull #1</div>
+          <div class="orbit-tag orbit-tag-2" id="avatar-tag-2">🏁 Max Verstappen</div>
           
           <div class="avatar-card">
             <div class="avatar-hologram-grid"></div>
@@ -184,7 +188,7 @@ app.innerHTML = `
     <div class="terminal-quick-chips">
       <button class="quick-chip" data-cmd="help">help</button>
       <button class="quick-chip" data-cmd="projects">projects</button>
-      <button class="quick-chip" data-cmd="f1">f1 (redbull)</button>
+      <button class="quick-chip" data-cmd="f1">f1 (white bull)</button>
       <button class="quick-chip" data-cmd="cricket">cricket</button>
       <button class="quick-chip" data-cmd="gaming">gaming</button>
       <button class="quick-chip" data-cmd="skills">skills</button>
@@ -203,7 +207,7 @@ app.innerHTML = `
     <div class="about-grid">
       <div class="glass-panel about-card">
         <p class="about-text">
-          I am a software architect driven by relentless speed and precision. Inspired by <strong>Max Verstappen's clinical racecraft and Oracle Red Bull Racing's engineering perfection</strong>, I approach code with the same obsession: zero wasted latency, pinpoint execution, and relentless pursuit of performance.
+          I am a software architect driven by relentless speed and precision. Inspired by <strong>Max Verstappen's clinical racecraft and Oracle Red Bull Racing's special edition engineering perfection</strong>, I approach code with the same obsession: zero wasted latency, pinpoint execution, and relentless pursuit of performance.
         </p>
         <p class="about-text">
           My love for <strong>Cricket</strong> informs my teamwork and clutch problem solving under high pressure, while my passion for <strong>Retro-Modern Gaming</strong> drives my love for fluid state machines, 60 FPS physics engines, and cinematic interactive WebGL interfaces.
@@ -214,7 +218,7 @@ app.innerHTML = `
         <div class="hero-actions">
           <a href="${personalInfo.github}" target="_blank" rel="noopener noreferrer" class="btn-secondary">
             <span>Explore GitHub Profile</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/></svg>
           </a>
         </div>
       </div>
@@ -237,7 +241,6 @@ app.innerHTML = `
     </div>
 
     <div class="contact-grid">
-      <!-- Left: Direct Verified Coordinates -->
       <div class="glass-panel contact-card">
         <h3 class="card-title">Verified Coordinates</h3>
         <p class="card-desc">Reach out directly via verified channels or copy my email address.</p>
@@ -289,7 +292,6 @@ app.innerHTML = `
         </div>
       </div>
 
-      <!-- Right: Interactive Dispatch Simulator -->
       <div class="glass-panel contact-card">
         <h3 class="card-title">Priority Message Transmitter</h3>
         <p class="card-desc">Send a transmission directly into the priority dispatch queue.</p>
@@ -331,7 +333,7 @@ app.innerHTML = `
       </div>
 
       <div class="footer-copy">
-        © ${new Date().getFullYear()} Tanmay Nilesh Shinde. Ultra Pro Max 3D WebGL Engine. F1 Red Bull • Cricket • Gaming. All systems operational.
+        © ${new Date().getFullYear()} Tanmay Nilesh Shinde. Ultra Pro Max 3D WebGL Engine. White Red Bull Special Edition • Cricket • Gaming. All systems operational.
       </div>
     </div>
   </footer>
@@ -346,6 +348,9 @@ const sceneManager = new SceneManager(canvasContainer, (project) => {
   projectModal.open(project.id);
 });
 sceneManager.setTheme(savedTheme, false);
+
+// 5. Initialize F1 Specification Technical Dossier Modal
+const f1SpecModal = new F1SpecModalController(sceneManager);
 
 // 5. Initialize Cyber Cursor
 new CyberCursor();
@@ -368,8 +373,8 @@ function applyTheme(themeId) {
   const tag1 = document.querySelector('#avatar-tag-1');
   const tag2 = document.querySelector('#avatar-tag-2');
   if (themeId === 'redbull') {
-    if (tag1) tag1.textContent = '🏎️ Verstappen #1';
-    if (tag2) tag2.textContent = '🏁 Oracle Red Bull F1';
+    if (tag1) tag1.textContent = '🏎️ White Bull #1';
+    if (tag2) tag2.textContent = '🏁 Max Verstappen';
   } else if (themeId === 'cricket') {
     if (tag1) tag1.textContent = '🏏 152 km/h Yorker';
     if (tag2) tag2.textContent = '🏟️ Stadium Floodlights';
@@ -394,12 +399,12 @@ function renderThematicCockpit(themeId) {
     container.innerHTML = `
       <div class="f1-header">
         <div class="f1-title-group">
-          <h3>🏎️ ORACLE RED BULL RACING // MAX VERSTAPPEN #1 COCKPIT</h3>
-          <p>Live Ingestion Simulation // High-Frequency Telemetry Ingestion Node</p>
+          <h3>🏎️ SPECIAL WHITE EDITION ORACLE RED BULL RACING // MAX VERSTAPPEN #1</h3>
+          <p>Pearl White Livery • Crimson Charging Bull • Flashing FIA Safety Rain Light</p>
         </div>
         <div class="telemetry-item">
-          <span class="telemetry-dot"></span>
-          <span class="font-mono text-cyan">TELEMETRY STREAM: 60Hz P2P</span>
+          <span class="telemetry-dot" style="background-color: #ff0022; box-shadow: 0 0 10px #ff0022;"></span>
+          <span class="font-mono text-cyan">FIA RAIN LED: ACTIVE (REAR DIFFUSER)</span>
         </div>
       </div>
 
@@ -415,22 +420,23 @@ function renderThematicCockpit(themeId) {
           <span class="gauge-subtext">Redline Limit: 12,500 RPM</span>
         </div>
         <div class="gauge-card">
-          <span class="gauge-label">GEAR & DRS STATUS</span>
-          <span class="gauge-value" id="f1-gear">8th <small style="font-size: 0.9rem; color: #ffc800;">[DRS ACTIVE]</small></span>
+          <span class="gauge-label">DRS & AERO STATUS</span>
+          <span class="gauge-value" id="f1-gear">8th <small style="font-size: 0.9rem; color: #ff0022;">[DRS READY]</small></span>
           <span class="gauge-subtext">Aero Drag Reduced by 28%</span>
         </div>
         <div class="gauge-card">
           <span class="gauge-label">DELTA TO P1</span>
           <span class="gauge-value" style="color: #00f57a;" id="f1-delta">-0.192s</span>
-          <span class="gauge-subtext">Monza Qualifying Lap: 1:20.104</span>
+          <span class="gauge-subtext">Pole Position Lap: 1:20.104</span>
         </div>
       </div>
 
       <div class="f1-controls-bar">
+        <button class="btn-f1-test highlight-red" id="f1-spec-open-btn" style="border-color: #e10600; background: rgba(225, 6, 0, 0.25); color: #fff; font-weight: 700;">📋 VIEW ALL CAR SPECS & DETAILS</button>
         <button class="btn-f1-test" id="f1-accel-btn">🔥 MAX ACCELERATION BURST</button>
-        <button class="btn-f1-test" id="f1-pit-btn">⏱️ SIMULATE PIT STRATEGY</button>
-        <button class="btn-f1-test" id="f1-drs-btn">⚡ TOGGLE DRS FLAP</button>
-        <span class="font-mono text-xs text-muted">Red Bull Racing Tech Stack: React 19 + Three.js + Socket.io</span>
+        <button class="btn-f1-test" id="f1-drs-btn">⚡ TOGGLE DRS WING FLAP</button>
+        <button class="btn-f1-test" id="f1-pit-btn">⏱️ SIMULATE 2.1s PIT STOP</button>
+        <span class="font-mono text-xs text-muted">White Tribute Livery: React 19 + Three.js + Web Audio</span>
       </div>
     `;
 
@@ -468,11 +474,11 @@ function renderThematicCockpit(themeId) {
 
     document.querySelector('#f1-pit-btn')?.addEventListener('click', () => {
       sound.playClick();
-      if (f1GearEl) f1GearEl.innerHTML = `BOX <small style="font-size: 0.9rem; color: #ff5500;">[2.1s STOP]</small>`;
+      if (f1GearEl) f1GearEl.innerHTML = `BOX <small style="font-size: 0.9rem; color: #ff0022;">[2.1s STOP]</small>`;
       if (f1SpeedEl) f1SpeedEl.innerHTML = `80 <small style="font-size: 1rem; color: #8d9bb0;">km/h</small>`;
       setTimeout(() => {
         sound.playRedBullF1();
-        if (f1GearEl) f1GearEl.innerHTML = `8th <small style="font-size: 0.9rem; color: #ffc800;">[DRS ACTIVE]</small>`;
+        if (f1GearEl) f1GearEl.innerHTML = `8th <small style="font-size: 0.9rem; color: #00f57a;">[DRS ACTIVE]</small>`;
         if (f1SpeedEl) f1SpeedEl.innerHTML = `342.6 <small style="font-size: 1rem; color: #8d9bb0;">km/h</small>`;
       }, 2100);
     });
@@ -483,6 +489,10 @@ function renderThematicCockpit(themeId) {
       if (f1GearEl) {
         f1GearEl.innerHTML = isOpen ? `8th <small style="font-size: 0.9rem; color: #00f57a;">[DRS OPEN]</small>` : `8th <small style="font-size: 0.9rem; color: #8d9bb0;">[DRS CLOSED]</small>`;
       }
+    });
+
+    document.querySelector('#f1-spec-open-btn')?.addEventListener('click', () => {
+      f1SpecModal.open();
     });
 
   } else if (themeId === 'cricket') {
@@ -600,6 +610,22 @@ function renderThematicCockpit(themeId) {
 renderThematicCockpit(savedTheme);
 
 // 8. 3D Sandbox Toolbar Buttons
+document.querySelector('#btn-3d-photo')?.addEventListener('click', () => {
+  sceneManager.setCameraPreset('photo');
+});
+
+document.querySelector('#btn-3d-cockpit')?.addEventListener('click', () => {
+  sceneManager.setCameraPreset('cockpit');
+});
+
+document.querySelector('#btn-3d-diffuser')?.addEventListener('click', () => {
+  sceneManager.setCameraPreset('diffuser');
+});
+
+document.querySelector('#btn-f1-details')?.addEventListener('click', () => {
+  f1SpecModal.open();
+});
+
 document.querySelector('#btn-3d-action')?.addEventListener('click', () => {
   sceneManager.triggerCorePulse();
 });
@@ -613,7 +639,7 @@ document.querySelector('#btn-3d-wireframe')?.addEventListener('click', (e) => {
 document.querySelector('#btn-3d-turntable')?.addEventListener('click', (e) => {
   sound.playClick();
   const isRotating = sceneManager.toggleAutoRotate();
-  e.target.textContent = isRotating ? '⏸️ PAUSE ORBIT' : '🔄 AUTO-ORBIT';
+  e.target.textContent = isRotating ? '⏸️ PAUSE ORBIT' : '🔄 TURNTABLE';
 });
 
 // 9. Bind Theme Button Clicks in HUD
@@ -702,15 +728,13 @@ function renderProjects(filter = 'all') {
 
         <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="card-btn-live" title="Visit Live Production App">
           <span>Live App</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/></svg>
         </a>
       </div>
     `;
 
-    // 3D Perspective Tilt Physics
     setupCardTilt(card);
 
-    // Modal inspect listener
     const inspectBtn = card.querySelector('.card-btn-inspect');
     inspectBtn.addEventListener('click', () => {
       projectModal.open(p.id);
@@ -722,7 +746,6 @@ function renderProjects(filter = 'all') {
 
 renderProjects();
 
-// Filter buttons listener
 document.querySelectorAll('.filter-chip').forEach(chip => {
   chip.addEventListener('click', () => {
     sound.playClick();

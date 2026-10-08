@@ -19,7 +19,7 @@ export class SceneManager {
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     this.raycaster = new THREE.Raycaster();
     this.mouseVector = new THREE.Vector2(-999, -999);
-    this.autoRotate = true;
+    this.autoRotate = false; // default false so user enjoys the studio photo perspective
     this.isWireframe = false;
 
     this.init();
@@ -35,13 +35,16 @@ export class SceneManager {
 
   init() {
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(0x040817, 0.012);
+    // Dark atmospheric studio haze matching the photo
+    this.scene.fog = new THREE.FogExp2(0x060810, 0.015);
 
     const width = this.container.clientWidth || window.innerWidth;
     const height = this.container.clientHeight || window.innerHeight;
 
-    this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
-    this.camera.position.set(0, 4.5, 18);
+    this.camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 1000);
+    
+    // Set initial camera to the exact dramatic rear three-quarter view from the photo!
+    this.camera.position.set(-8.5, 6.5, -11.5);
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -51,26 +54,29 @@ export class SceneManager {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.3;
+    this.renderer.toneMappingExposure = 1.35;
     this.container.appendChild(this.renderer.domElement);
 
-    // Dynamic Multi-Point Lighting
-    this.ambientLight = new THREE.AmbientLight(0x0a142c, 2.8);
+    // Studio Lighting matching the photo
+    this.ambientLight = new THREE.AmbientLight(0x0e1424, 2.6);
     this.scene.add(this.ambientLight);
 
-    this.dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
-    this.dirLight.position.set(10, 20, 15);
+    // Overhead Key Studio Spotlight (Cool white illuminating pearl white chassis)
+    this.dirLight = new THREE.DirectionalLight(0xf2f6ff, 3.2);
+    this.dirLight.position.set(-10, 18, -6);
     this.scene.add(this.dirLight);
 
-    this.pointLightMain = new THREE.PointLight(0xffc800, 4.0, 50);
+    // Subtle Cyan Fill Light
+    this.pointLightMain = new THREE.PointLight(0x4cc9f0, 2.5, 45);
     this.pointLightMain.position.set(12, 10, 12);
     this.scene.add(this.pointLightMain);
 
-    this.pointLightSec = new THREE.PointLight(0xe10600, 3.5, 50);
-    this.pointLightSec.position.set(-12, -8, 10);
+    // Intense Red Reflection Light matching the ground red pool behind rear diffuser
+    this.pointLightSec = new THREE.PointLight(0xff0022, 4.5, 30);
+    this.pointLightSec.position.set(-2, 0.4, -4.5);
     this.scene.add(this.pointLightSec);
 
-    this.cursorLight = new THREE.PointLight(0xff5500, 2.5, 30);
+    this.cursorLight = new THREE.PointLight(0xffffff, 1.8, 25);
     this.scene.add(this.cursorLight);
   }
 
@@ -82,12 +88,12 @@ export class SceneManager {
     const renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(renderPass);
 
-    // UnrealBloomPass for Cinematic Neon Glow & Exhaust Flames
+    // UnrealBloomPass for glowing red FIA rain light and pearl sheen
     this.bloomPass = new UnrealBloomPass(
       new THREE.Vector2(width, height),
-      0.65, // bloom strength
-      0.4,  // radius
-      0.82  // threshold
+      0.75, // bloom strength
+      0.45, // radius
+      0.80  // threshold
     );
     this.composer.addPass(this.bloomPass);
   }
@@ -96,24 +102,25 @@ export class SceneManager {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
-    this.controls.maxDistance = 50;
-    this.controls.minDistance = 6;
-    this.controls.maxPolarAngle = Math.PI / 2 + 0.1; // Don't flip under floor
-    this.controls.autoRotate = true;
-    this.controls.autoRotateSpeed = 1.2;
-    this.controls.enableZoom = false; // Keep scroll smooth for page
+    this.controls.maxDistance = 45;
+    this.controls.minDistance = 5;
+    this.controls.maxPolarAngle = Math.PI / 2 + 0.05;
+    this.controls.autoRotate = false;
+    this.controls.autoRotateSpeed = 1.0;
+    this.controls.enableZoom = false; // Smooth page scrolling
+    this.controls.target.set(0, 0.8, 0.5);
   }
 
   createParticles() {
-    const particleCount = 2400;
+    const particleCount = 2000;
     this.particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     this.particleColors = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 160;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 160;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
+      positions[i * 3] = (Math.random() - 0.5) * 150;
+      positions[i * 3 + 1] = Math.random() * 20 - 2; // Ground smoke haze
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 150;
     }
 
     this.particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -125,7 +132,7 @@ export class SceneManager {
     const ctx = canvas.getContext('2d');
     const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
     grad.addColorStop(0, 'rgba(255,255,255,1)');
-    grad.addColorStop(0.3, 'rgba(255,200,0,0.8)');
+    grad.addColorStop(0.4, 'rgba(255,255,255,0.4)');
     grad.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 32, 32);
@@ -133,7 +140,7 @@ export class SceneManager {
     const texture = new THREE.CanvasTexture(canvas);
 
     this.particleMat = new THREE.PointsMaterial({
-      size: 0.9,
+      size: 0.8,
       map: texture,
       transparent: true,
       vertexColors: true,
@@ -150,7 +157,7 @@ export class SceneManager {
   updateParticleColors(theme) {
     let palette;
     if (theme === 'redbull') {
-      palette = [new THREE.Color(0xffc800), new THREE.Color(0xe10600), new THREE.Color(0xff5500), new THREE.Color(0x0070f3)];
+      palette = [new THREE.Color(0xffffff), new THREE.Color(0xff0022), new THREE.Color(0xffc800), new THREE.Color(0x8892b0)];
     } else if (theme === 'cricket') {
       palette = [new THREE.Color(0x00f57a), new THREE.Color(0xffd700), new THREE.Color(0xffffff), new THREE.Color(0x0070f3)];
     } else {
@@ -168,7 +175,7 @@ export class SceneManager {
   }
 
   createModels() {
-    // 1. Procedural 3D Red Bull F1 Car
+    // 1. Procedural 3D White Edition Red Bull F1 Car
     this.f1Car = new F1CarModel();
     this.scene.add(this.f1Car.group);
 
@@ -209,18 +216,15 @@ export class SceneManager {
       }
     });
 
-    // Click Raycasting on 3D objects
-    this.renderer.domElement.addEventListener('click', (e) => {
+    this.renderer.domElement.addEventListener('click', () => {
       this.raycaster.setFromCamera(this.mouseVector, this.camera);
       
-      // Check 3D Carousel Cards first
       const hitProject = this.holoCarousel.checkRaycast(this.raycaster);
       if (hitProject) {
         if (this.onSelectProject) this.onSelectProject(hitProject);
         return;
       }
 
-      // Check Active Theme 3D Model
       if (this.currentTheme === 'redbull') {
         this.f1Car.triggerRev();
         sound.playRedBullF1();
@@ -253,29 +257,61 @@ export class SceneManager {
     if (this.cricket) this.cricket.group.visible = (theme === 'cricket');
     if (this.arcade) this.arcade.group.visible = (theme === 'gaming');
 
-    // Lights & Fog
     if (theme === 'redbull') {
-      this.scene.fog.color.setHex(0x040817);
-      this.pointLightMain.color.setHex(0xffc800);
-      this.pointLightSec.color.setHex(0xe10600);
-      this.cursorLight.color.setHex(0xff5500);
-      this.camera.position.set(0, 4.5, 18);
+      this.scene.fog.color.setHex(0x060810);
+      this.dirLight.color.setHex(0xf2f6ff);
+      this.pointLightMain.color.setHex(0x4cc9f0);
+      this.pointLightSec.color.setHex(0xff0022);
+      this.camera.position.set(-8.5, 6.5, -11.5); // Rear 3/4 photo angle!
+      this.controls.target.set(0, 0.8, 0.5);
     } else if (theme === 'cricket') {
       this.scene.fog.color.setHex(0x031008);
       this.pointLightMain.color.setHex(0x00f57a);
       this.pointLightSec.color.setHex(0xffd700);
-      this.cursorLight.color.setHex(0x0070f3);
       this.camera.position.set(0, 6.0, 22);
+      this.controls.target.set(0, 1.2, 0);
     } else if (theme === 'gaming') {
       this.scene.fog.color.setHex(0x090514);
       this.pointLightMain.color.setHex(0xf72585);
       this.pointLightSec.color.setHex(0x4cc9f0);
-      this.cursorLight.color.setHex(0x7209b7);
       this.camera.position.set(0, 5.5, 16);
+      this.controls.target.set(0, 4.0, 0);
     }
 
-    this.controls.target.set(0, 1.5, 0);
     this.updateParticleColors(theme);
+  }
+
+  // Preset: Reset to the iconic rear 3/4 photo angle
+  setPhotoAngle() {
+    this.setCameraPreset('photo');
+  }
+
+  setCameraPreset(preset) {
+    sound.playClick();
+    if (this.currentTheme === 'redbull') {
+      if (preset === 'photo') {
+        this.camera.position.set(-8.5, 6.5, -11.5);
+        this.controls.target.set(0, 0.8, 0.5);
+      } else if (preset === 'cockpit') {
+        this.camera.position.set(0, 1.45, 0.95);
+        this.controls.target.set(0, 0.7, 4.5);
+      } else if (preset === 'front') {
+        this.camera.position.set(0, 2.2, 9.5);
+        this.controls.target.set(0, 0.6, 1.5);
+      } else if (preset === 'side') {
+        this.camera.position.set(-11.0, 2.5, 0.5);
+        this.controls.target.set(0, 0.8, 0.5);
+      } else if (preset === 'diffuser') {
+        this.camera.position.set(0, 1.6, -7.5);
+        this.controls.target.set(0, 0.5, -1.0);
+      }
+    } else if (this.currentTheme === 'cricket') {
+      this.camera.position.set(0, 6.0, 22);
+      this.controls.target.set(0, 1.2, 0);
+    } else {
+      this.camera.position.set(0, 5.5, 16);
+      this.controls.target.set(0, 4.0, 0);
+    }
   }
 
   toggleAutoRotate() {
@@ -316,16 +352,12 @@ export class SceneManager {
 
     this.cursorLight.position.set(this.mouse.x * 25, this.mouse.y * 18, 12);
 
-    // Update controls
     this.controls.update();
 
-    // Starfield particles drift
     if (this.particles) {
-      this.particles.rotation.y = elapsedTime * (this.currentTheme === 'redbull' ? 0.03 : 0.015);
-      this.particles.rotation.x = this.mouse.y * 0.1;
+      this.particles.rotation.y = elapsedTime * 0.015;
     }
 
-    // Update active model animations
     if (this.currentTheme === 'redbull' && this.f1Car.group.visible) {
       this.f1Car.update(delta, elapsedTime);
     } else if (this.currentTheme === 'cricket' && this.cricket.group.visible) {
@@ -334,7 +366,6 @@ export class SceneManager {
       this.arcade.update(delta, elapsedTime);
     }
 
-    // Update 3D Holo-Carousel
     if (this.holoCarousel) {
       this.holoCarousel.update(delta, elapsedTime);
     }
