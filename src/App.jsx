@@ -30,6 +30,19 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Dynamic Browser Tab Title based on active section
+  useEffect(() => {
+    const titles = {
+      home: 'Tanmay Shinde – Full Stack Developer',
+      skills: 'Tech Stack | Tanmay Shinde',
+      projects: 'Repositories | Tanmay Shinde',
+      archive: 'Archive | Tanmay Shinde',
+      activity: 'Activity Telemetry | Tanmay Shinde',
+      contact: 'Initiate Contact | Tanmay Shinde'
+    };
+    document.title = titles[activeTab] || 'Tanmay Shinde – Full Stack Developer';
+  }, [activeTab]);
+
   return (
     <div className="min-h-screen bg-[#09090b] text-[#e2e8f0] relative flex selection:bg-blue-600 selection:text-white">
       {/* Subtle Fluid Cursor */}
