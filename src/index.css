@@ -4,22 +4,28 @@
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --primary: #2563eb;
+    --primary-glow: rgba(37, 99, 235, 0.25);
+    --bg-dark: #09090b;
+    --surface-dark: #111216;
+    --surface-card: #14161c;
+    --border-dark: rgba(255, 255, 255, 0.08);
     color-scheme: dark;
   }
 
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
-    background-color: #050505;
-    color: #f3f4f6;
+    background-color: #09090b;
+    color: #e2e8f0;
   }
 
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #050505;
-    color: #f3f4f6;
+    background-color: #09090b;
+    color: #e2e8f0;
     min-height: 100vh;
     font-family: var(--font-sans);
   }
@@ -37,65 +43,63 @@
 }
 
 /* ---------------------------------------------------------
-   GLASSMORPHISM & CUSTOM UTILITIES
+   CYBER DEVELOPER DESIGN SYSTEM (Clean & Sharp)
 --------------------------------------------------------- */
-.glass-panel {
-  background: rgba(13, 17, 28, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+.font-mono {
+  font-family: var(--font-mono);
 }
 
-.glass-panel-card {
-  background: rgba(10, 14, 26, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-panel-card:hover {
-  border-color: rgba(34, 211, 238, 0.35);
-  box-shadow: 0 20px 40px -15px rgba(34, 211, 238, 0.15), 0 0 25px rgba(34, 211, 238, 0.1);
-  transform: translateY(-2px);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, #c084fc 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.bg-radial-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+.bg-grid-pattern {
   background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
+
+.bg-surface-dark {
+  background-color: #111216;
+}
+
+.bg-surface-card {
+  background-color: #14161c;
+}
+
+.border-border-dark {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.glow-primary {
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.35);
+}
+
+.glow-primary-sm {
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+}
+
+/* Heatmap level styling */
+.heatmap-lvl-0 { background-color: #16181f; border-color: #20242e; }
+.heatmap-lvl-1 { background-color: #1e3a8a; border-color: #2563eb; }
+.heatmap-lvl-2 { background-color: #2563eb; border-color: #3b82f6; }
+.heatmap-lvl-3 { background-color: #3b82f6; border-color: #60a5fa; }
+.heatmap-lvl-4 { background-color: #60a5fa; border-color: #93c5fd; box-shadow: 0 0 8px rgba(96, 165, 250, 0.5); }
 
 /* ---------------------------------------------------------
-   CUSTOM SCROLLBAR
+   CUSTOM CLEAN SCROLLBAR
 --------------------------------------------------------- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-  border: 2px solid #050505;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.6);
+  background: rgba(37, 99, 235, 0.6);
 }
