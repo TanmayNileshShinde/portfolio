@@ -1,29 +1,40 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Footer from './components/Footer'; // <-- Import added
+import Education from './components/Education';
+import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 
 function App() {
   return (
-    <div className="min-h-screen selection:bg-cyan-500/30 selection:text-white overflow-hidden relative bg-[#050505]">
-      
-      {/* --- ADD THESE TWO DIVS FOR THE ANIMATED BACKGROUND --- */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-cyan-900/20 blur-[120px] mix-blend-screen pointer-events-none animate-[pulse_8s_ease-in-out_infinite]" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-900/20 blur-[120px] mix-blend-screen pointer-events-none animate-[pulse_10s_ease-in-out_infinite_reverse]" />
-      {/* ------------------------------------------------------ */}
+    <div className="min-h-screen relative bg-[#050505] text-gray-100 overflow-x-hidden">
+      {/* Custom Fluid Cursor (Fine pointer only) */}
+      <Cursor />
 
-      {/* The rest of your app components */}
-      <div className="relative z-10">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-        </main>
-        <Footer /> 
-      </div>
+      {/* Subtle Background Radial Grid Texture */}
+      <div className="fixed inset-0 bg-radial-grid opacity-30 pointer-events-none -z-20" />
+
+      {/* Ambient Animated Gradient Orbs */}
+      <div className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none -z-10 animate-pulse" />
+      <div className="fixed top-[45%] right-[-10%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] rounded-full bg-blue-600/10 blur-[150px] pointer-events-none -z-10" />
+      <div className="fixed bottom-[-10%] left-[20%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-indigo-600/10 blur-[140px] pointer-events-none -z-10" />
+
+      {/* Navigation Header */}
+      <Navbar />
+
+      {/* Main Portfolio Content */}
+      <main className="relative z-10">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Education />
+      </main>
+
+      {/* Footer & Contact Experience */}
+      <Footer />
     </div>
   );
 }
