@@ -1,5 +1,6 @@
 export const personalInfo = {
   name: "Tanmay Nilesh Shinde",
+  shortName: "Tanmay",
   firstName: "Tanmay",
   lastName: "Shinde",
   domain: "tanmay.dev",
@@ -388,6 +389,11 @@ export const education = {
     "Database Management Systems & Distributed Databases",
     "Computer Networks & Socket Architectures",
     "Software Engineering & Agile Methodologies"
+  ],
+  highlights: [
+    "Specialized in modern client-side scripting and modern web frameworks",
+    "Developed multiple deployed web applications tackling real-time collaboration and cloud persistence",
+    "Hands-on architectural experience with WebRTC, WebSockets, and Cloud Infrastructure"
   ],
   achievements: [
     "Published research on low-latency simulation in defense computing",

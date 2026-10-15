@@ -75,7 +75,7 @@ const Education = () => {
 
             <div className="space-y-3 pt-4 border-t border-white/10">
               <p className="text-xs font-mono text-gray-400 uppercase tracking-wider">Key Academic Competencies:</p>
-              {education.highlights.map((item, idx) => (
+              {(education?.highlights || education?.achievements || []).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed">
                   <span className="text-cyan-400 mt-1">✔</span>
                   <span>{item}</span>

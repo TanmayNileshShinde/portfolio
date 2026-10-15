@@ -10,6 +10,8 @@ import Education from './components/Education';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 
+import ErrorBoundary from './components/ErrorBoundary';
+
 export default function App() {
   useEffect(() => {
     const handleScroll = () => {
@@ -59,13 +61,15 @@ export default function App() {
 
       {/* Main Single-Page Portfolio Experience */}
       <main className="relative z-10">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Activity />
-        <Archive />
-        <Education />
+        <ErrorBoundary>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Activity />
+          <Archive />
+          <Education />
+        </ErrorBoundary>
       </main>
 
       {/* Footer & Contact Experience */}

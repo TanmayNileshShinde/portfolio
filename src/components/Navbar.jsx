@@ -72,7 +72,7 @@ const Navbar = () => {
             T
           </div>
           <span className="text-white font-bold tracking-tight text-lg group-hover:text-cyan-300 transition-colors">
-            {personalInfo.shortName}<span className="text-cyan-400">.</span>
+            {personalInfo?.shortName || personalInfo?.firstName || 'Tanmay'}<span className="text-cyan-400">.</span>
           </span>
         </button>
 
