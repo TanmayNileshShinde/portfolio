@@ -1,16 +1,61 @@
-# React + Vite
+# ⚡ Tanmay Shinde — Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![GitHub stars](https://img.shields.io/github/stars/TanmayNileshShinde/portfolio.svg?style=flat&color=yellow)](https://github.com/TanmayNileshShinde/portfolio/stargazers)
+![React 19](https://img.shields.io/badge/React-19-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
+![Tailwind CSS 4](https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-Currently, two official plugins are available:
+> **Personal developer portfolio showcasing full-stack applications, real-time engines, and frontend design engineering.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Cyberpunk / Terminal Aesthetics:** Modern dark-mode interface with ambient gradients, monospace typographic accents, and glassmorphism.
+- **Fluid Micro-Interactions:** Smooth spring physics and enter animations powered by Framer Motion.
+- **Interactive Project Showcase:** Live demos, GitHub source links, and detailed tech stack breakdowns for flagship projects like *CollabNClass*, *LedgerFlow*, *VanishChat*, and *AnTPDF*.
+- **Live Terminal & Status System:** Real-time developer status indicator and interactive CLI command drawer.
+- **Ultra Responsive:** Pixel-perfect layout tailored for mobile, tablet, and ultra-wide desktop viewports.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Framework:** [React 19](https://react.dev/)
+- **Build Tool:** [Vite 8](https://vite.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Motion:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/TanmayNileshShinde/portfolio.git
+cd portfolio
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Run development server
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 📬 Contact
+
+- **Name:** Tanmay Nilesh Shinde
+- **Email:** [tanmaynileshshinde@gmail.com](mailto:tanmaynileshshinde@gmail.com)
+- **LinkedIn:** [tanmay-shinde-9b07753bb](https://www.linkedin.com/in/tanmay-shinde-9b07753bb)
+- **GitHub:** [@TanmayNileshShinde](https://github.com/TanmayNileshShinde)
