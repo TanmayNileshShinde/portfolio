@@ -57,5 +57,5 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 - **Name:** Tanmay Nilesh Shinde
 - **Email:** [tanmaynileshshinde@gmail.com](mailto:tanmaynileshshinde@gmail.com)
-- **LinkedIn:** [tanmay-shinde-9b07753bb](https://www.linkedin.com/in/tanmay-shinde-9b07753bb)
+- **LinkedIn:** [tanmaynileshshinde](https://www.linkedin.com/in/tanmaynileshshinde)
 - **GitHub:** [@TanmayNileshShinde](https://github.com/TanmayNileshShinde)
