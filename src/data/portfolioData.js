@@ -262,7 +262,7 @@ export const archiveRecords = [
     id: "rec-1",
     num: "01",
     title: "Internal Hackathon 2025 – Winner & Best Innovation",
-    issuer: "DBIT ACM Student Chapter",
+    issuer: "SAKEC ACM Student Chapter",
     date: "2025",
     category: "HACKATHON",
     description: "Awarded 1st place for architecting an intelligent real-time collaboration system with peer-to-peer data synchronization.",
@@ -377,7 +377,7 @@ export const networkStatus = {
 
 export const education = {
   degree: "Bachelor of Engineering in Computer Engineering",
-  institution: "Don Bosco Institute of Technology (DBIT), Mumbai",
+  institution: "Shah & Anchor Kutchhi Engineering College (SAKEC), Mumbai",
   period: "2022 — 2026",
   location: "Mumbai, Maharashtra",
   status: "Undergraduate (Final Year)",
