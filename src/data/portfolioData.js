@@ -301,12 +301,12 @@ export const archiveRecords = [
   {
     id: "rec-5",
     num: "05",
-    title: "WebRTC & Real-Time Distributed Communication",
-    issuer: "Frontend Masters",
-    date: "2024",
+    title: "Getting Started with Linux Fundamentals (RH104)",
+    issuer: "Red Hat",
+    date: "2026",
     category: "CERTIFICATE",
-    description: "Mastery of SDP negotiations, ICE candidates, STUN/TURN traversal, and WebRTC data channels.",
-    link: "https://frontendmasters.com"
+    description: "Official Red Hat Academy training covering Linux core architecture, command-line operations, file system hierarchy, permissions, and shell scripting.",
+    link: "https://www.credly.com/badges/f721b7a4-2bb0-4f50-9731-bfaad16cbe2f"
   },
   {
     id: "rec-6",
