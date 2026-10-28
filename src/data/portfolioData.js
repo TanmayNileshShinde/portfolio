@@ -135,17 +135,18 @@ export const projectsList = [
     categoryLabel: "PERSONAL PROJECTS",
     title: "CollabClass",
     badge: "FLAGSHIP",
-    type: "Real-Time Collaboration",
-    description: "A full-scale real-time collaboration ecosystem featuring multi-user peer-to-peer WebRTC video/audio conferencing and synchronized shared interactive workspaces with instant presence detection.",
-    architecture: "Engineered on React and WebRTC mesh topology with Firebase signaling and Firestore real-time state listeners. Capable of bi-directional low-latency canvas synchronization with optimistic client updates.",
+    type: "Real-Time Collaborative Virtual Classroom",
+    description: "A flagship collaborative virtual classroom ecosystem featuring WebRTC video calling over Stream SFU mesh, synchronized collaborative canvas, an embedded Groq AI study tutor, and in-meeting Shiki code execution.",
+    architecture: "Architected on React 18 and Stream Video SFU mesh with WebRTC telemetry, Clerk Ocean Cyberpunk auth, Supabase real-time attendance persistence, and Groq LLM API integration. Features optimistic multi-user whiteboard synchronization with sub-50ms latency.",
     features: [
-      "Peer-to-peer WebRTC video & audio communication channels",
-      "Real-time synchronized canvas & interactive collaborative whiteboard",
-      "Instant multi-user presence detection and dynamic room session management",
-      "Sub-50ms state synchronization powered by Firebase real-time listeners",
-      "Fluid responsive dark mode interface designed for high focus"
+      "Stream Video WebRTC SFU mesh conferencing with dynamic bitrate adaptivity",
+      "Real-time synchronized collaborative whiteboard canvas & drawing tools",
+      "Embedded Groq AI study tutor assistant with streaming markdown answers",
+      "Interactive multi-language Shiki code review & GitHub repository importer",
+      "Automated attendance join/leave logging with Supabase beacon tracking",
+      "In-meeting sliding side dock with unified live chat and raised-hands queue"
     ],
-    tech: ["React", "WebRTC", "Firebase", "Tailwind CSS", "Vite", "Socket.io"],
+    tech: ["React 18", "Stream Video SDK", "WebRTC", "TypeScript", "Clerk", "Supabase", "Groq AI", "Tailwind CSS", "Vite"],
     github: "https://github.com/TanmayNileshShinde/collabnclass",
     live: "https://collabnclass.vercel.app",
     featured: true
