@@ -23,7 +23,7 @@ const iconMap = {
 export default function Sidebar({ activeTab, setActiveTab, mobileOpen, setMobileOpen }) {
   const [localTime, setLocalTime] = useState('');
 
-  // Live ticking clock in IST (Asia/Kolkata)
+  // live clock
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();

@@ -21,7 +21,7 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      // Simple active section detection
+      // active section
       const scrollPosition = window.scrollY + 200;
       for (const link of navLinks) {
         const el = document.getElementById(link.id);

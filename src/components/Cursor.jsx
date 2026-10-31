@@ -6,13 +6,13 @@ const Cursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Smooth spring physics for outer ring
+  // spring physics
   const springConfig = { stiffness: 400, damping: 28, mass: 0.5 };
   const springX = useSpring(-100, springConfig);
   const springY = useSpring(-100, springConfig);
 
   useEffect(() => {
-    // Disable custom cursor entirely on touch-only devices
+    // touch check
     if (window.matchMedia('(pointer: coarse)').matches) {
       return;
     }

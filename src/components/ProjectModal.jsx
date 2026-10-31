@@ -50,7 +50,7 @@ export default function ProjectModal({ project, onClose }) {
         {/* Overview */}
         <div className="space-y-2">
           <h3 className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
-            // SYSTEM_OVERVIEW
+            // overview
           </h3>
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             {project.description}
@@ -73,7 +73,7 @@ export default function ProjectModal({ project, onClose }) {
         {/* Key Features */}
         <div className="space-y-3">
           <h3 className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
-            // CORE_CAPABILITIES
+            // capabilities
           </h3>
           <ul className="space-y-2 font-mono text-xs sm:text-sm">
             {project.features.map((feat, idx) => (
@@ -88,7 +88,7 @@ export default function ProjectModal({ project, onClose }) {
         {/* Tech Stack Pills */}
         <div className="space-y-2">
           <h3 className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
-            // STACK_SPECIFICATION
+            // tech stack
           </h3>
           <div className="flex flex-wrap gap-2">
             {project.tech.map((t, idx) => (

@@ -32,10 +32,10 @@ export default function ContactView() {
 
     setStatus('transmitting');
 
-    // Simulate cyber transmission protocol
+    // send message
     setTimeout(() => {
       setStatus('delivered');
-      // Format a direct mailto link as fallback/convenience
+      // mailto fallback
       const mailto = `mailto:${personalInfo.email}?subject=Contact from ${encodeURIComponent(
         formData.identity
       )}&body=${encodeURIComponent(

@@ -1,6 +1,6 @@
 export * from './portfolioData';
 
-// Backwards compatibility exports
+// exports
 import { personalInfo, techStackCategories, projectsList, education } from './portfolioData';
 
 export const stats = [

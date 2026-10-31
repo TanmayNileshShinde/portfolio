@@ -16,7 +16,7 @@ const Footer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formState.email || !formState.message) return;
-    // Client-side simulated submission with mailto fallback
+    // submit fallback
     setFormSubmitted(true);
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formState.name || 'Visitor'}`);
     const body = encodeURIComponent(`${formState.message}\n\nFrom: ${formState.name} (${formState.email})`);

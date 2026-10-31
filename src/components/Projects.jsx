@@ -5,12 +5,12 @@ import { GithubIcon } from './Icons';
 import { projectsList, projectCategories } from '../data/portfolioData';
 import ProjectModal from './ProjectModal';
 
-// 3D Interactive Card Component
+// 3d card
 const ProjectCard = ({ project, index, onOpenModal }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Motion values for smooth 3D mouse tracking
+  // mouse tracking
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 

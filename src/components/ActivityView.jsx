@@ -11,14 +11,14 @@ import {
 } from 'lucide-react';
 import { telemetryData } from '../data/portfolioData';
 
-// Generate 52 weeks x 7 days realistic contribution grid
+// contribution grid
 function generateContributions() {
   const weeks = 52;
   const daysPerWeek = 7;
   const grid = [];
   const today = new Date();
 
-  // Pattern seeds to make realistic activity bursts
+  // activity seeds
   for (let w = 0; w < weeks; w++) {
     const week = [];
     for (let d = 0; d < daysPerWeek; d++) {
@@ -32,7 +32,7 @@ function generateContributions() {
         year: 'numeric'
       });
 
-      // Realistic pseudo-random commit count based on week index and day
+      // commit count
       const isWeekend = d === 0 || d === 6;
       const seed = Math.sin(w * 13 + d * 7) * 10000;
       const rand = seed - Math.floor(seed);
@@ -41,7 +41,7 @@ function generateContributions() {
       let level = 0;
 
       if (w > 46) {
-        // Recent high streak
+        // recent streak
         count = Math.floor(rand * 5) + 1;
       } else if (!isWeekend && rand > 0.42) {
         count = Math.floor(rand * 6) + 1;
@@ -370,7 +370,7 @@ export default function ActivityView() {
           {/* Badges Earned */}
           <div className="bg-[#101217] border border-[rgba(255,255,255,0.08)] p-6 space-y-3 font-mono">
             <span className="text-slate-500 text-[11px] uppercase tracking-wider block">
-              // VERIFIED_BADGES_&_AWARDS
+              // badges
             </span>
             <div className="flex flex-wrap gap-2.5">
               {telemetryData.leetcode.badges.map((badge, idx) => (
